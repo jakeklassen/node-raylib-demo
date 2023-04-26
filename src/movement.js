@@ -9,6 +9,7 @@ const screenHeight = GAME_HEIGHT * 4;
 
 // Found it was smoother to disable vsync
 // r.SetConfigFlags(r.FLAG_VSYNC_HINT);
+// r.SetConfigFlags(r.FLAG_WINDOW_UNDECORATED);
 r.InitWindow(screenWidth, screenHeight, "raylib movement");
 
 const playerTextureUrl = fileURLToPath(
@@ -88,11 +89,6 @@ while (!r.WindowShouldClose()) {
 
 	while (deltaTimeAccumulator >= STEP) {
 		r.SetWindowTitle(`raylib [FPS: ${r.GetFPS()}]`);
-
-		input.left = r.IsKeyDown(r.KEY_LEFT);
-		input.right = r.IsKeyDown(r.KEY_RIGHT);
-		input.up = r.IsKeyDown(r.KEY_UP);
-		input.down = r.IsKeyDown(r.KEY_DOWN);
 
 		for (const player of players) {
 			player.dx = 0;
