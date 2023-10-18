@@ -1,27 +1,31 @@
 import { fileURLToPath } from "node:url";
+import { World } from "objecs";
 import r from "raylib";
+import { starfieldFactory } from "./entity-factories/star.js";
+import { movementSystemFactory } from "./systems/movement-system.js";
+import { starfieldRenderingSystemFactory } from "./systems/starfield-rendering-system.js";
+import { starfieldSystemFactory } from "./systems/starfield-system.js";
 
 const GAME_WIDTH = 128;
 const GAME_HEIGHT = 128;
 
-const screenWidth = GAME_WIDTH * 6;
-const screenHeight = GAME_HEIGHT * 6;
+const screenWidth = GAME_WIDTH * 4;
+const screenHeight = GAME_HEIGHT * 4;
 
 // Found it was smoother to disable vsync
 // r.SetConfigFlags(r.FLAG_VSYNC_HINT);
 // r.SetConfigFlags(r.FLAG_WINDOW_UNDECORATED);
-// r.SetTargetFPS(120);
-r.InitWindow(screenWidth, screenHeight, "raylib movement");
-
-// r.SetWindowState(r.FLAG_VSYNC_HINT);
-// r.ClearWindowState(r.FLAG_VSYNC_HINT);
+// r.SetConfigFlags(r.FLAG_FULLSCREEN_MODE);
+r.InitWindow(screenWidth, screenHeight, "ECS Demo");
+r.SetWindowMinSize(GAME_WIDTH, GAME_HEIGHT);
+// r.SetTargetFPS(60);
 
 const playerTextureUrl = fileURLToPath(
-	new URL("../assets/image/player-ship.png", import.meta.url)
+	new URL("../../assets/image/player-ship.png", import.meta.url)
 );
 
 const pico8FontUrl = fileURLToPath(
-	new URL("../assets/font/pico-8.ttf", import.meta.url)
+	new URL("../../assets/font/pico-8.ttf", import.meta.url)
 );
 
 // Not sure why, but this seems needed for this font to render properly
@@ -35,46 +39,37 @@ const playerTexture = r.LoadTexture(playerTextureUrl);
  */
 const renderTexture = r.LoadRenderTexture(GAME_WIDTH, GAME_HEIGHT);
 
+/**
+ * @type {World<import("./entity.js").Entity>}
+ */
+const world = new World();
+
+starfieldFactory({
+	areaWidth: GAME_WIDTH - 1,
+	areaHeight: GAME_HEIGHT - 1,
+	count: 100,
+	world,
+});
+
+const systems = [
+	starfieldSystemFactory({
+		world,
+	}),
+	movementSystemFactory({
+		world,
+	}),
+	starfieldRenderingSystemFactory({
+		r,
+		world,
+	}),
+];
+
 const input = {
 	left: false,
 	right: false,
 	up: false,
 	down: false,
 };
-
-const player1 = {
-	sprite: playerTexture,
-	boxCollider: {
-		offsetX: 0,
-		offsetY: 0,
-		width: playerTexture.width,
-		height: playerTexture.height,
-	},
-	x: Math.floor(GAME_WIDTH / 2 - playerTexture.width / 2),
-	y: Math.floor(GAME_HEIGHT / 2 - playerTexture.height / 2) - 16,
-	dx: 0,
-	dy: 0,
-	vx: 60,
-	vy: 60,
-};
-
-const player2 = {
-	sprite: playerTexture,
-	boxCollider: {
-		offsetX: 0,
-		offsetY: 0,
-		width: playerTexture.width,
-		height: playerTexture.height,
-	},
-	x: Math.floor(GAME_WIDTH / 2 - playerTexture.width / 2),
-	y: Math.floor(GAME_HEIGHT / 2 - playerTexture.height / 2) + 16,
-	dx: 0,
-	dy: 0,
-	vx: 60,
-	vy: 60,
-};
-
-const players = [player1, player2];
 
 const TARGET_FPS = 60;
 const STEP = 1 / TARGET_FPS;
@@ -83,7 +78,7 @@ let variableDt = 0;
 let deltaTimeAccumulator = 0;
 
 while (!r.WindowShouldClose()) {
-	r.SetWindowTitle(`raylib [FPS: ${r.GetFPS()}]`);
+	r.SetWindowTitle(`ECS Demo [FPS: ${r.GetFPS()}]`);
 
 	deltaTimeAccumulator += r.GetFrameTime();
 	variableDt = r.GetFrameTime();
@@ -93,46 +88,6 @@ while (!r.WindowShouldClose()) {
 	input.up = r.IsKeyDown(r.KEY_UP);
 	input.down = r.IsKeyDown(r.KEY_DOWN);
 
-	while (deltaTimeAccumulator >= STEP) {
-		deltaTimeAccumulator -= STEP;
-	}
-
-	for (const player of players) {
-		player.dx = 0;
-		player.dy = 0;
-
-		if (input.left) {
-			player.dx = -1;
-		} else if (input.right) {
-			player.dx = 1;
-		}
-
-		if (input.up) {
-			player.dy = -1;
-		} else if (input.down) {
-			player.dy = 1;
-		}
-
-		player.x += player.dx * player.vx * variableDt;
-		player.y += player.dy * player.vy * variableDt;
-
-		if (player.x < 0) {
-			player.x = 0;
-			player.dx = 1;
-		} else if (player.x > GAME_WIDTH - player.boxCollider.width) {
-			player.x = GAME_WIDTH - player.boxCollider.width;
-			player.dx = -1;
-		}
-
-		if (player.y < 0) {
-			player.y = 0;
-			player.dy = 1;
-		} else if (player.y > GAME_HEIGHT - player.boxCollider.height) {
-			player.y = GAME_HEIGHT - player.boxCollider.height;
-			player.dy = -1;
-		}
-	}
-
 	// -------------------------------------------------------------------------
 	// Render to texture
 	// -------------------------------------------------------------------------
@@ -141,15 +96,20 @@ while (!r.WindowShouldClose()) {
 
 	r.ClearBackground(r.BLACK);
 
-	r.DrawTexture(player1.sprite, player1.x, player1.y, r.WHITE);
-	r.DrawTexture(player2.sprite, player2.x, player2.y, r.WHITE);
+	while (deltaTimeAccumulator >= STEP) {
+		// Fixed update
 
-	r.DrawCircle(GAME_WIDTH / 2, GAME_HEIGHT / 2, 4, r.WHITE);
+		deltaTimeAccumulator -= STEP;
+	}
 
-	const textMetrics = r.MeasureTextEx(pico8Font, `Movement Demo`, 5, 1);
+	for (const system of systems) {
+		system(variableDt);
+	}
+
+	const textMetrics = r.MeasureTextEx(pico8Font, `ECS Demo`, 5, 1);
 	r.DrawTextEx(
 		pico8Font,
-		`Movement Demo`,
+		`ECS Demo`,
 		{ x: Math.floor(GAME_WIDTH / 2 - textMetrics.x / 2), y: 1 },
 		5,
 		1,

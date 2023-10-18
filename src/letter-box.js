@@ -4,17 +4,14 @@ import r from "raylib";
 const GAME_WIDTH = 128;
 const GAME_HEIGHT = 128;
 
-const screenWidth = GAME_WIDTH * 6;
-const screenHeight = GAME_HEIGHT * 6;
+const screenWidth = GAME_WIDTH * 4;
+const screenHeight = GAME_HEIGHT * 4;
 
 // Found it was smoother to disable vsync
 // r.SetConfigFlags(r.FLAG_VSYNC_HINT);
 // r.SetConfigFlags(r.FLAG_WINDOW_UNDECORATED);
-// r.SetTargetFPS(120);
-r.InitWindow(screenWidth, screenHeight, "raylib movement");
-
-// r.SetWindowState(r.FLAG_VSYNC_HINT);
-// r.ClearWindowState(r.FLAG_VSYNC_HINT);
+r.SetTargetFPS(60);
+r.InitWindow(screenWidth, screenHeight, "raylib letter box");
 
 const playerTextureUrl = fileURLToPath(
 	new URL("../assets/image/player-ship.png", import.meta.url)
@@ -28,6 +25,8 @@ const pico8FontUrl = fileURLToPath(
 const pico8Font = r.LoadFontEx(pico8FontUrl, 5, 0, 0);
 
 const playerTexture = r.LoadTexture(playerTextureUrl);
+
+const display = r.GetCurrentMonitor();
 
 /**
  * We render to a texture that represent that _actual_ game size.
@@ -51,7 +50,7 @@ const player1 = {
 		height: playerTexture.height,
 	},
 	x: Math.floor(GAME_WIDTH / 2 - playerTexture.width / 2),
-	y: Math.floor(GAME_HEIGHT / 2 - playerTexture.height / 2) - 16,
+	y: Math.floor(GAME_HEIGHT / 2 - playerTexture.height / 2) - 8,
 	dx: 0,
 	dy: 0,
 	vx: 60,
@@ -67,7 +66,7 @@ const player2 = {
 		height: playerTexture.height,
 	},
 	x: Math.floor(GAME_WIDTH / 2 - playerTexture.width / 2),
-	y: Math.floor(GAME_HEIGHT / 2 - playerTexture.height / 2) + 16,
+	y: Math.floor(GAME_HEIGHT / 2 - playerTexture.height / 2) + 8,
 	dx: 0,
 	dy: 0,
 	vx: 60,
@@ -141,8 +140,8 @@ while (!r.WindowShouldClose()) {
 
 	r.ClearBackground(r.BLACK);
 
-	r.DrawTexture(player1.sprite, player1.x, player1.y, r.WHITE);
-	r.DrawTexture(player2.sprite, player2.x, player2.y, r.WHITE);
+	r.DrawTexture(player1.sprite, player1.x | 0, player1.y | 0, r.WHITE);
+	r.DrawTexture(player2.sprite, player2.x | 0, player2.y | 0, r.WHITE);
 
 	r.DrawCircle(GAME_WIDTH / 2, GAME_HEIGHT / 2, 4, r.WHITE);
 
