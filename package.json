@@ -11,11 +11,11 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"@types/node": "^20.10.8",
+		"@types/node": "^20.11.6",
 		"typescript": "^5.3.3"
 	},
 	"dependencies": {
-		"objecs": "^0.0.19",
+		"objecs": "^0.0.21",
 		"raylib": "^0.14.0"
 	}
 }
