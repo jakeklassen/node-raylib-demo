@@ -6,24 +6,24 @@ settings:
 
 dependencies:
   objecs:
-    specifier: ^0.0.21
-    version: 0.0.21
+    specifier: ^0.0.22
+    version: 0.0.22
   raylib:
     specifier: ^0.14.0
     version: 0.14.0
 
 devDependencies:
   '@types/node':
-    specifier: ^20.12.4
-    version: 20.12.4
+    specifier: ^20.12.6
+    version: 20.12.6
   typescript:
     specifier: ^5.4.4
     version: 5.4.4
 
 packages:
 
-  /@types/node@20.12.4:
-    resolution: {integrity: sha512-E+Fa9z3wSQpzgYQdYmme5X3OTuejnnTx88A6p6vkkJosR3KBz+HpE3kqNm98VE6cfLFcISx7zW7MsJkH6KwbTw==}
+  /@types/node@20.12.6:
+    resolution: {integrity: sha512-3KurE8taB8GCvZBPngVbp0lk5CKi8M9f9k1rsADh0Evdz5SzJ+Q+Hx9uHoFGsLnLnd1xmkDQr2hVhlA0Mn0lKQ==}
     dependencies:
       undici-types: 5.26.5
     dev: true
@@ -52,10 +52,10 @@ packages:
       whatwg-url: 5.0.0
     dev: false
 
-  /objecs@0.0.21:
-    resolution: {integrity: sha512-qOp70AKBN8RzWKTyvyO302tK8l6Ac6BvnLeUF7CDFUOPBO220wlIDyFX8FtwEkusV5XMR4WHriTMBQF/lhLosQ==}
+  /objecs@0.0.22:
+    resolution: {integrity: sha512-Al8H6VKm9pMXVWn+7mYeKY0/zqLuSKjYMMYgdRnEGlSHTLvbttuH/EsIn+nDS4ezMJjqwyZrB4xfzLNOSf7bog==}
     dependencies:
-      type-fest: 4.9.0
+      type-fest: 4.15.0
     dev: false
 
   /raylib@0.14.0:
@@ -74,8 +74,8 @@ packages:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
     dev: false
 
-  /type-fest@4.9.0:
-    resolution: {integrity: sha512-KS/6lh/ynPGiHD/LnAobrEFq3Ad4pBzOlJ1wAnJx9N4EYoqFhMfLIBjUT2UEx4wg5ZE+cC1ob6DCSpppVo+rtg==}
+  /type-fest@4.15.0:
+    resolution: {integrity: sha512-tB9lu0pQpX5KJq54g+oHOLumOx+pMep4RaM6liXh2PKmVRFF+/vAtUP0ZaJ0kOySfVNjF6doBWPHhBhISKdlIA==}
     engines: {node: '>=16'}
     dev: false
 
