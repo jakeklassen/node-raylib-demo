@@ -9,23 +9,23 @@ importers:
   .:
     dependencies:
       objecs:
-        specifier: ^0.0.22
-        version: 0.0.22
+        specifier: ^0.0.26
+        version: 0.0.26
       raylib:
         specifier: ^0.14.0
         version: 0.14.0
     devDependencies:
       '@types/node':
-        specifier: ^20.12.12
-        version: 20.12.12
+        specifier: ^22.10.2
+        version: 22.10.2
       typescript:
-        specifier: ^5.4.5
-        version: 5.4.5
+        specifier: ^5.7.2
+        version: 5.7.2
 
 packages:
 
-  '@types/node@20.12.12':
-    resolution: {integrity: sha512-eWLDGF/FOSPtAvEqeRAQ4C8LSA7M1I7i0ky1I8U7kD1J5ITyW3AsRhQrKVoWf5pFKZ2kILsEGJhsI9r93PYnOw==}
+  '@types/node@22.10.2':
+    resolution: {integrity: sha512-Xxr6BBRCAOQixvonOye19wnzyDiUtTeqldOOmj3CkeblonbccA12PFwlufvRdrpjXxqnmUaeiU5EOA+7s5diUQ==}
 
   cross-fetch@3.1.5:
     resolution: {integrity: sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==}
@@ -42,8 +42,8 @@ packages:
       encoding:
         optional: true
 
-  objecs@0.0.22:
-    resolution: {integrity: sha512-Al8H6VKm9pMXVWn+7mYeKY0/zqLuSKjYMMYgdRnEGlSHTLvbttuH/EsIn+nDS4ezMJjqwyZrB4xfzLNOSf7bog==}
+  objecs@0.0.26:
+    resolution: {integrity: sha512-szca+BVqvax8Cmcs2/qD7Sr36kn/qzdQEjV4XFAZhix37IEyxDHMrsPf7wNORJt+twEzWdh26sD0vI6sFvMjYA==}
 
   raylib@0.14.0:
     resolution: {integrity: sha512-6dwsArtyWNhL+1R+uBpNlf+4Korpp24vdUKs24k27kMbvSmz8MJGh1ysXCjO5q6lQWKrfs/x4b2w+ygFV58I7g==}
@@ -53,17 +53,17 @@ packages:
   tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
 
-  type-fest@4.15.0:
-    resolution: {integrity: sha512-tB9lu0pQpX5KJq54g+oHOLumOx+pMep4RaM6liXh2PKmVRFF+/vAtUP0ZaJ0kOySfVNjF6doBWPHhBhISKdlIA==}
+  type-fest@4.30.0:
+    resolution: {integrity: sha512-G6zXWS1dLj6eagy6sVhOMQiLtJdxQBHIA9Z6HFUNLOlr6MFOgzV8wvmidtPONfPtEUv0uZsy77XJNzTAfwPDaA==}
     engines: {node: '>=16'}
 
-  typescript@5.4.5:
-    resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
+  typescript@5.7.2:
+    resolution: {integrity: sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==}
     engines: {node: '>=14.17'}
     hasBin: true
 
-  undici-types@5.26.5:
-    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+  undici-types@6.20.0:
+    resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
 
   webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
@@ -73,9 +73,9 @@ packages:
 
 snapshots:
 
-  '@types/node@20.12.12':
+  '@types/node@22.10.2':
     dependencies:
-      undici-types: 5.26.5
+      undici-types: 6.20.0
 
   cross-fetch@3.1.5:
     dependencies:
@@ -89,9 +89,9 @@ snapshots:
     dependencies:
       whatwg-url: 5.0.0
 
-  objecs@0.0.22:
+  objecs@0.0.26:
     dependencies:
-      type-fest: 4.15.0
+      type-fest: 4.30.0
 
   raylib@0.14.0:
     dependencies:
@@ -102,11 +102,11 @@ snapshots:
 
   tr46@0.0.3: {}
 
-  type-fest@4.15.0: {}
+  type-fest@4.30.0: {}
 
-  typescript@5.4.5: {}
+  typescript@5.7.2: {}
 
-  undici-types@5.26.5: {}
+  undici-types@6.20.0: {}
 
   webidl-conversions@3.0.1: {}
 
