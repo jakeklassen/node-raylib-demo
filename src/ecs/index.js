@@ -18,7 +18,7 @@ const screenHeight = GAME_HEIGHT * 4;
 // r.SetConfigFlags(r.FLAG_FULLSCREEN_MODE);
 r.InitWindow(screenWidth, screenHeight, "ECS Demo");
 r.SetWindowMinSize(GAME_WIDTH, GAME_HEIGHT);
-// r.SetTargetFPS(60);
+r.SetTargetFPS(60);
 
 const playerTextureUrl = fileURLToPath(
 	new URL("../../assets/image/player-ship.png", import.meta.url)
