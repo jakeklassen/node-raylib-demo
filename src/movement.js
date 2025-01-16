@@ -1,16 +1,17 @@
 import { fileURLToPath } from "node:url";
 import r from "raylib";
 
+const SCALE = 6;
 const GAME_WIDTH = 128;
 const GAME_HEIGHT = 128;
 
-const screenWidth = GAME_WIDTH * 6;
-const screenHeight = GAME_HEIGHT * 6;
+const screenWidth = GAME_WIDTH * SCALE;
+const screenHeight = GAME_HEIGHT * SCALE;
 
 // Found it was smoother to disable vsync
-// r.SetConfigFlags(r.FLAG_VSYNC_HINT);
+r.SetConfigFlags(r.FLAG_VSYNC_HINT);
 // r.SetConfigFlags(r.FLAG_WINDOW_UNDECORATED);
-// r.SetTargetFPS(120);
+r.SetTargetFPS(120);
 r.InitWindow(screenWidth, screenHeight, "raylib movement");
 
 // r.SetWindowState(r.FLAG_VSYNC_HINT);
